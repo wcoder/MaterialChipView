@@ -1,0 +1,30 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+  <metadata>
+    <id>MaterialChipView</id>
+    <version>1.0.1</version>
+    <title>Material Chip View for Xamarin.Android</title>
+    <authors>Yauheni Pakala</authors>
+    <owners>Yauheni Pakala</owners>
+     <licenseUrl>https://github.com/wcoder/MaterialChipView/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/wcoder/MaterialChipView</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Material Chip View can be used as tags for categories, contacts or creating text clouds.</description>
+    <tags>xamarin android monodroid xamarin.android material chip view</tags>
+    <dependencies>
+      <group targetFramework="MonoAndroid">
+        <dependency id="Xamarin.Android.Support.Animated.Vector.Drawable" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Annotations" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Compat" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Core.UI" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Core.Utils" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Fragment" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Media.Compat" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.v7.AppCompat" version="25.3.1" />
+        <dependency id="Xamarin.Android.Support.Vector.Drawable" version="25.3.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\MaterialChipView\bin\Release\MaterialChipView.dll" target="lib\MonoAndroid\MaterialChipView.dll" />
+  </files>
+</package>
