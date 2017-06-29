@@ -1,4 +1,4 @@
-# Material Chip View
+# Material Chip View ![version](http://img.shields.io/badge/original-v1.0.1-brightgreen.svg?style=flat) [![NuGet](https://img.shields.io/nuget/v/MaterialChipView.svg?label=NuGet)](https://www.nuget.org/packages/MaterialChipView/)
 
 Port of [MaterialChipView](https://github.com/robertlevonyan/materialChipView) for Xamarin.Android
 
