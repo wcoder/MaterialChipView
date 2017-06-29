@@ -111,7 +111,7 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MaterialChipView\MaterialChipView.csproj">
+    <ProjectReference Include="..\..\src\MaterialChipView\MaterialChipView.csproj">
       <Project>{20cd7bf0-3ec0-4ba5-9df4-67c68e3c193a}</Project>
       <Name>MaterialChipView</Name>
     </ProjectReference>
