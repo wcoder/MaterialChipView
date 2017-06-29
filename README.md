@@ -6,10 +6,10 @@ Port of [MaterialChipView](https://github.com/robertlevonyan/materialChipView) f
 
 ## Setup
 
-#### Nuget:
+#### NuGet:
 
 ```
-// TODO:
+Install-Package MaterialChipView
 ```
 
 ## Usage
