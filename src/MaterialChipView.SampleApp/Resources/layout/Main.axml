@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+  <com.google.android.flexbox.FlexboxLayout
+    android:id="@+id/flexbox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:flexWrap="wrap"
+    app:alignItems="flex_start"
+    app:alignContent="space_around"
+    app:showDivider="middle">
+
+
+    <MaterialChipView.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:mcv_chipText="Chip Sample" />
+
+    <MaterialChipView.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:mcv_chipText="Chip Sample"
+      app:mcv_closable="true" />
+
+    <MaterialChipView.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:mcv_chipText="Chip Sample"
+      app:mcv_selectable="true" />
+
+    <MaterialChipView.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:mcv_chipText="Chip Sample"
+      app:mcv_hasIcon="true"
+      app:mcv_chipIcon="@drawable/icon"/>
+
+    <MaterialChipView.Chip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:mcv_chipText="Chip Sample"
+      app:mcv_hasIcon="true"
+      app:mcv_chipIcon="@drawable/icon"
+      app:mcv_closable="true"/>
+
+    <MaterialChipView.Chip
+      android:id="@+id/football_chip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/activity_vertical_margin"
+      app:mcv_backgroundColor="@color/colorFootball"
+      app:mcv_chipIcon="@drawable/football"
+      app:mcv_chipText="Football"
+      app:mcv_closeColor="@color/colorFootballSelected"
+      app:mcv_hasIcon="true"
+      app:mcv_selectable="true"
+      app:mcv_selectedTextColor="@color/colorFootballSelected"
+      app:mcv_selectedBackgroundColor="@color/colorFootballSelected"
+      app:mcv_textColor="@color/colorFootballSelected" />
+
+    <MaterialChipView.Chip
+      android:id="@+id/basketball_chip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/activity_vertical_margin"
+      app:mcv_backgroundColor="@color/colorBasketball"
+      app:mcv_chipIcon="@drawable/basketball"
+      app:mcv_chipText="Basketball"
+      app:mcv_closeColor="@color/colorBasketballSelected"
+      app:mcv_hasIcon="true"
+      app:mcv_selectable="true"
+      app:mcv_selectedBackgroundColor="@color/colorBasketballSelected"
+      app:mcv_textColor="@color/colorBasketballSelected" />
+
+    <MaterialChipView.Chip
+      android:id="@+id/tennis_chip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/activity_vertical_margin"
+      app:mcv_backgroundColor="@color/colorTennis"
+      app:mcv_chipIcon="@drawable/tennis"
+      app:mcv_chipText="Tennis"
+      app:mcv_hasIcon="true"
+      app:mcv_closable="true"
+      app:mcv_closeColor="@color/colorTennisSelected"
+      app:mcv_textColor="@color/colorTennisSelected" />
+
+
+
+  </com.google.android.flexbox.FlexboxLayout>
+
+
+
+  
+  
+</RelativeLayout>
