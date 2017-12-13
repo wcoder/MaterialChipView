@@ -33,6 +33,7 @@ namespace MaterialChipView
 
         private bool _clicked;
         private bool _selected;
+        private TextView _chipTextView;
 
         #endregion
 
@@ -52,8 +53,12 @@ namespace MaterialChipView
         public string ChipText
 	    {
 	        get => _chipText;
-	        set => _chipText = value;
-	    }
+            set
+            {
+                _chipText = value;
+                InitTextView();
+            }
+        }
 
         /// <summary>
         /// Chip label color
@@ -70,8 +75,12 @@ namespace MaterialChipView
 	    public int BackgroundColor
 	    {
 	        get => _backgroundColor;
-	        set => _backgroundColor = value;
-	    }
+            set
+            {
+                _backgroundColor = value;
+                InitBackgroundColor();
+            }
+        }
 
         /// <summary>
         /// Custom background color when selected
@@ -388,7 +397,10 @@ namespace MaterialChipView
 
         private void InitTextView()
         {
-            var chipTextView = new TextView(Context);
+            bool addView = _chipTextView == null;
+
+            if (_chipTextView == null)
+                _chipTextView = new TextView(Context);
 
             var chipTextParams = new LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             if (_hasIcon || _closable || _selectable)
@@ -407,12 +419,13 @@ namespace MaterialChipView
             int endMargin = _closable || _selectable ? 0 : (int)Resources.GetDimension(Resource.Dimension.chip_horizontal_padding);
             chipTextParams.SetMargins(startMargin, 0, endMargin, 0);
 
-            chipTextView.LayoutParameters = chipTextParams;
-            chipTextView.SetTextColor(new Color(_clicked? _selectedTextColor : _textColor));
-            chipTextView.Text = _chipText;
-            chipTextView.Id = TextId;
+            _chipTextView.LayoutParameters = chipTextParams;
+            _chipTextView.SetTextColor(new Color(_clicked ? _selectedTextColor : _textColor));
+            _chipTextView.Text = _chipText;
+            _chipTextView.Id = TextId;
 
-            AddView(chipTextView);
+            if(addView)
+                AddView(_chipTextView);
         }
 
         private void InitBackgroundColor()
