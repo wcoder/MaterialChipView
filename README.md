@@ -20,32 +20,26 @@ Install-Package MaterialChipView
     android:layout_height="wrap_content"
     app:mcv_chipText="Chip Sample" />
 ```
-![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/sample.png)
+![chip](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/chip.jpg)
 
 ### Cutomizing Chip
 
 ```xml
 app:mcv_closable="true"
 ```
-![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/closable.png)
+![alt text](https://github.com/robertlevonyan/materialChipView/blob/master/Images/chip_closable.jpg)
 
 ```xml
 app:mcv_selectable="true"
 ```
-![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/selectable.png)
+|![alt text](https://github.com/robertlevonyan/materialChipView/blob/master/Images/chip_selectable_0.jpg)|![alt text](https://github.com/robertlevonyan/materialChipView/blob/master/Images/chip_selectable_1.jpg)|
+|----------------------------------------------------------------------------------------------|-----------|
 
 ```xml
 app:mcv_hasIcon="true"
 app:mcv_chipIcon="@drawable/customIcon"
 ```
-![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/hasIcon.png)
-
-```xml
-app:mcv_hasIcon="true"
-app:mcv_chipIcon="@drawable/customIcon"
-app:mcv_closable="true"
-```
-![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/hasIconClosable.png)
+![alt text](https://github.com/robertlevonyan/materialChipView/raw/master/Images/chip_icon.jpg)
 
 ```xml
 app:mcv_backgroundColor="@color/customChipBackgroundColor"
@@ -54,7 +48,7 @@ app:mcv_selectedBackgroundColor="@color/customSelectedChipColor"
 app:mcv_textColor="@color/customTitleColor"
 ```
 
-|![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/custom1.png)|![alt text](https://raw.githubusercontent.com/robertlevonyan/materialChipView/master/Images/custom2.png)|
+|![alt text](https://github.com/robertlevonyan/materialChipView/raw/master/Images/chip_cloud_0.jpg)|![alt text](https://github.com/robertlevonyan/materialChipView/raw/master/Images/chip_cloud_1.jpg)|
 |----------------------------------------------------------------------------------------------|-----------|
 
 ### Attributes
