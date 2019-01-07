@@ -7,7 +7,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.Content;
-
+using Android.Support.V4.View;
 using static MaterialChipView.ChipUtils;
 
 namespace MaterialChipView
@@ -19,6 +19,7 @@ namespace MaterialChipView
         private string _chipText;
         private bool _hasIcon;
         private Drawable _chipIcon;
+        private Bitmap _chipIconBitmap;
         private bool _closable;
         private bool _selectable;
         private int _backgroundColor;
@@ -27,11 +28,17 @@ namespace MaterialChipView
         private int _selectedTextColor;
         private int _closeColor;
         private int _selectedCloseColor;
+        private int _cornerRadius;
+        private int _strokeSize;
+        private int _strokeColor;
+        private string _iconText;
+        private int _iconTextColor;
+        private int _iconTextBackgroundColor;
 
         private ImageView _closeIcon;
         private ImageView _selectIcon;
+        private TextView _chipTextView;
 
-        private bool _clicked;
         private bool _selected;
 
         #endregion
@@ -52,7 +59,7 @@ namespace MaterialChipView
         public string ChipText
 	    {
 	        get => _chipText;
-	        set => _chipText = value;
+            set { _chipText = value; RequestLayout(); }
 	    }
 
         /// <summary>
@@ -61,7 +68,7 @@ namespace MaterialChipView
 	    public int TextColor
 	    {
 	        get => _textColor;
-	        set => _textColor = value;
+            set { _textColor = value; RequestLayout(); }
 	    }
 
         /// <summary>
@@ -70,7 +77,7 @@ namespace MaterialChipView
 	    public int BackgroundColor
 	    {
 	        get => _backgroundColor;
-	        set => _backgroundColor = value;
+            set { _backgroundColor = value; RequestLayout(); }
 	    }
 
         /// <summary>
@@ -79,8 +86,8 @@ namespace MaterialChipView
 	    public int SelectedBackgroundColor
 	    {
 	        get => _selectedBackgroundColor;
-	        set => _selectedBackgroundColor = value;
-	    }
+            set { _selectedBackgroundColor = value; RequestLayout(); }
+        }
 
         /// <summary>
         /// Chip has icon
@@ -88,7 +95,7 @@ namespace MaterialChipView
         public bool HasIcon
         {
             get => _hasIcon;
-            set => _hasIcon = value;
+            set { _hasIcon = value; RequestLayout(); }
         }
 
         /// <summary>
@@ -97,8 +104,8 @@ namespace MaterialChipView
         public Drawable ChipIcon
 	    {
 	        get => _chipIcon;
-	        set => _chipIcon = value;
-	    }
+            set { _chipIcon = value; RequestLayout(); }
+        }
 
         /// <summary>
         /// Chip has close button
@@ -110,6 +117,8 @@ namespace MaterialChipView
             {
 	            _closable = value;
 	            _selectable = false;
+                _selected = false;
+                RequestLayout();
             }
 	    }
 
@@ -119,7 +128,7 @@ namespace MaterialChipView
         public int CloseColor
 	    {
 	        get => _closeColor;
-	        set => _closeColor = value;
+            set { _closeColor = value; RequestLayout(); }
 	    }
 
 	    /// <summary>
@@ -132,16 +141,10 @@ namespace MaterialChipView
             {
                 _selectable = value;
                 _closable = false;
+                _selected = false;
+                RequestLayout();
             }
         }
-
-	    /// <summary>
-	    /// Chip as clicked
-	    /// </summary>
-	    public bool Clicked
-	    {
-	        set => _clicked = value;
-	    }
 
 	    /// <summary>
 	    /// Custom color for label when selected
@@ -149,8 +152,8 @@ namespace MaterialChipView
 	    public int SelectedTextColor
 	    {
 	        get => _selectedTextColor;
-	        set => _selectedTextColor = value;
-	    }
+            set { _selectedTextColor = value; RequestLayout(); }
+        }
 
         /// <summary>
         /// Custom color for close button when selected
@@ -158,8 +161,46 @@ namespace MaterialChipView
 	    public int SelectedCloseColor
 	    {
 	        get => _selectedCloseColor;
-	        set => _selectedCloseColor = value;
+            set { _selectedCloseColor = value; RequestLayout(); }
 	    }
+
+        public int CornerRadius
+        {
+            get => _cornerRadius;
+            set { _cornerRadius = value; RequestLayout(); }
+        }
+
+        public int StrokeColor
+        {
+            get => _strokeColor;
+            set { _strokeColor = value; RequestLayout(); }
+        }
+
+        public int StrokeSize
+        {
+            get => _strokeSize;
+            set { _strokeSize = value; RequestLayout(); }
+        }
+
+        public string IconText
+        {
+            get => _iconText;
+        }
+
+        public bool IsSelected
+        {
+            get => _selected;
+            set
+            {
+                if (!_selectable)
+                {
+                    return;
+                }
+
+                _selected = value;
+                RequestLayout();
+            }
+        }
 
         #endregion
 
@@ -179,6 +220,8 @@ namespace MaterialChipView
             : base(context, attrs, defStyleAttr)
         {
             InitTypedArray(attrs);
+
+            // InitChipClick(); skipped
         }
 
         #endregion
@@ -189,10 +232,7 @@ namespace MaterialChipView
         {
             base.OnAttachedToWindow();
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
-            {
-                BuildView();
-            }
+            BuildView();
         }
 
         protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
@@ -207,14 +247,16 @@ namespace MaterialChipView
             LayoutParameters = thisParams;
         }
 
-        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
-        {
-            base.OnSizeChanged(w, h, oldw, oldh);
+        #endregion
 
-            if (Build.VERSION.SdkInt < BuildVersionCodes.N)
-            {
-                BuildView();
-            }
+        #region public methods
+
+        public void SetIconText(string iconText, int iconTextColor, int iconTextBackgroundColor)
+        {
+            _iconText = GenerateText(iconText);
+            _iconTextColor = iconTextColor == 0 ? ContextCompat.GetColor(Context, Resource.Color.colorChipBackgroundClicked) : iconTextColor;
+            _iconTextBackgroundColor = iconTextBackgroundColor == 0 ? ContextCompat.GetColor(Context, Resource.Color.colorChipCloseClicked) : iconTextBackgroundColor;
+            RequestLayout();
         }
 
         #endregion
@@ -223,52 +265,33 @@ namespace MaterialChipView
 
         private void BuildView()
         {
+            InitCloseIcon();
+            InitSelectIcon();
             InitBackgroundColor();
             InitTextView();
             InitImageIcon();
-            InitCloseIcon();
-            InitSelectIcon();
         }
 
         private void InitSelectClick()
         {
-            _selectIcon.Touch += (sender, args) =>
+            _selectIcon.Click += (sender, args) =>
             {
-                switch (args.Event.Action) {
-                    case MotionEventActions.Down:
-                    case MotionEventActions.Pointer1Down:
-                        OnSelectTouchDown();
-                        break;
-                    case MotionEventActions.Up:
-                    case MotionEventActions.Pointer1Up:
-                        OnSelectTouchUp((View)sender);
-                        break;
-                }
+                SelectChip((View)sender);
             };
         }
 
-        private void OnSelectTouchDown()
+        private void SelectChip(View v)
         {
-            _clicked = !_clicked;
+            if (!_selectable)
+            {
+                return;
+            }
+
+            _selected = !_selected;
             InitBackgroundColor();
             InitTextView();
             _selectIcon.SetImageResource(Resource.Drawable.ic_select);
-            SetIconColor(_selectIcon, _clicked ? _selectedCloseColor : _closeColor);
-        }
-
-        private void OnSelectTouchUp(View v)
-        {
-            _selected = !_clicked;
-            if (_selected)
-            {
-                _clicked = false;
-                InitBackgroundColor();
-
-                InitTextView();
-                _selectIcon.SetImageResource(Resource.Drawable.ic_select);
-                SetIconColor(_selectIcon, _closeColor);
-            }
-            _selected = !_selected;
+            SetIconColor(_selectIcon, _selected ? _selectedCloseColor : _closeColor);
 
             OnSelectClick(v, _selected);
         }
@@ -280,39 +303,33 @@ namespace MaterialChipView
                 switch (args.Event.Action) {
                     case MotionEventActions.Down:
                     case MotionEventActions.Pointer1Down:
-                        OnCloseTouchDown();
+                        CloseChip((View)sender, true);
                         break;
                     case MotionEventActions.Up:
                     case MotionEventActions.Pointer1Up:
-                        OnCloseTouchUp((View)sender);
+                        CloseChip((View)sender, false);
                         break;
                 }
             };
         }
 
-        private void OnCloseTouchDown()
+        private void CloseChip(View v, bool clicked)
         {
-            _clicked = true;
+            _selected = !_selected;
+
             InitBackgroundColor();
             InitTextView();
             _closeIcon.SetImageResource(Resource.Drawable.ic_close);
-            SetIconColor(_closeIcon, _selectedCloseColor);
-        }
-
-        private void OnCloseTouchUp(View v)
-        {
-            _clicked = false;
-            InitBackgroundColor();
-            InitTextView();
-            _closeIcon.SetImageResource(Resource.Drawable.ic_close);
-            SetIconColor(_closeIcon, _closeColor);
-
+            SetIconColor(_closeIcon, _selected ? _selectedCloseColor : _closeColor);
             OnCloseClick(v);
         }
 
         private void InitSelectIcon()
         {
-            if (!_selectable) return;
+            if (!_selectable)
+            {
+                return;
+            }
 
             _selectIcon = new ImageView(Context);
 
@@ -329,7 +346,7 @@ namespace MaterialChipView
             _selectIcon.LayoutParameters = selectIconParams;
             _selectIcon.SetScaleType(ImageView.ScaleType.Center);
             _selectIcon.SetImageResource(Resource.Drawable.ic_select);
-            SetIconColor(_selectIcon, _clicked ? _selectedCloseColor : _closeColor);
+            SetIconColor(_selectIcon, _closeColor);
 
             InitSelectClick();
 
@@ -338,9 +355,15 @@ namespace MaterialChipView
 
         private void InitCloseIcon()
         {
-            if (!_closable) return;
+            if (!_closable)
+            {
+                return;
+            }
 
-            _closeIcon = new ImageView(Context);
+            if (_closeIcon == null)
+            {
+                _closeIcon = new ImageView(Context);
+            }
 
             var closeIconParams = new LayoutParams((int)Resources.GetDimension(Resource.Dimension.chip_close_icon_size2), (int)Resources.GetDimension(Resource.Dimension.chip_close_icon_size2));
             closeIconParams.AddRule(Build.VERSION.SdkInt >= BuildVersionCodes.JellyBeanMr1 ? LayoutRules.EndOf : LayoutRules.RightOf, TextId);
@@ -381,6 +404,18 @@ namespace MaterialChipView
                 icon.SetImageBitmap(GetCircleBitmap(Context, bitmap));
             }
 
+            if (_chipIconBitmap != null)
+            {
+                _chipIconBitmap = GetSquareBitmap(_chipIconBitmap);
+                icon.SetImageBitmap(GetCircleBitmap(Context, _chipIconBitmap));
+                icon.BringToFront();
+            }
+            if (_iconText != null && !_iconText.Equals(""))
+            {
+                Bitmap textBitmap = getCircleBitmapWithText(Context, _iconText, _iconTextColor, _iconTextBackgroundColor);
+                icon.SetImageBitmap(textBitmap);
+            }
+
             icon.Click += OnIconClick;
 
             AddView(icon);
@@ -388,7 +423,15 @@ namespace MaterialChipView
 
         private void InitTextView()
         {
-            var chipTextView = new TextView(Context);
+            if (!ViewCompat.IsAttachedToWindow(this))
+            {
+                return;
+            }
+
+            if (_chipTextView == null)
+            {
+                _chipTextView = new TextView(Context);
+            }
 
             var chipTextParams = new LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             if (_hasIcon || _closable || _selectable)
@@ -407,18 +450,23 @@ namespace MaterialChipView
             int endMargin = _closable || _selectable ? 0 : (int)Resources.GetDimension(Resource.Dimension.chip_horizontal_padding);
             chipTextParams.SetMargins(startMargin, 0, endMargin, 0);
 
-            chipTextView.LayoutParameters = chipTextParams;
-            chipTextView.SetTextColor(new Color(_clicked? _selectedTextColor : _textColor));
-            chipTextView.Text = _chipText;
-            chipTextView.Id = TextId;
+            _chipTextView.LayoutParameters = chipTextParams;
+            _chipTextView.SetTextColor(new Color(_selected ? _selectedTextColor : _textColor));
+            _chipTextView.Text = _chipText;
+            _chipTextView.Id = TextId;
 
-            AddView(chipTextView);
+            RemoveView(_chipTextView);
+            AddView(_chipTextView);
         }
 
         private void InitBackgroundColor()
         {
-            var bgDrawable = new PaintDrawable(new Color(_clicked? _selectedBackgroundColor : _backgroundColor));
-            bgDrawable.SetCornerRadius(Resources.GetDimension(Resource.Dimension.chip_height) / 2);
+            var bgDrawable = new GradientDrawable();
+            bgDrawable.SetShape(ShapeType.Rectangle);
+            bgDrawable.SetCornerRadii(new float[]{ _cornerRadius, _cornerRadius, _cornerRadius, _cornerRadius,
+                _cornerRadius, _cornerRadius, _cornerRadius, _cornerRadius});
+            bgDrawable.SetColor(_selected ? _selectedBackgroundColor : _backgroundColor);
+            bgDrawable.SetStroke(_strokeSize, new Color(_strokeColor));
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBean)
             {
@@ -445,6 +493,12 @@ namespace MaterialChipView
             _selectedTextColor = ta.GetColor(Resource.Styleable.Chip_mcv_selectedTextColor, ContextCompat.GetColor(Context, Resource.Color.colorChipTextClicked));
             _closeColor = ta.GetColor(Resource.Styleable.Chip_mcv_closeColor, ContextCompat.GetColor(Context, Resource.Color.colorChipCloseInactive));
             _selectedCloseColor = ta.GetColor(Resource.Styleable.Chip_mcv_selectedCloseColor, ContextCompat.GetColor(Context, Resource.Color.colorChipCloseClicked));
+            _cornerRadius = (int)ta.GetDimension(Resource.Styleable.Chip_mcv_cornerRadius, Resources.GetDimension(Resource.Dimension.chip_height) / 2);
+            _strokeSize = (int)ta.GetDimension(Resource.Styleable.Chip_mcv_strokeSize, 0);
+            _strokeColor = ta.GetColor(Resource.Styleable.Chip_mcv_strokeColor, ContextCompat.GetColor(Context, Resource.Color.colorChipCloseClicked));
+            _iconText = ta.GetString(Resource.Styleable.Chip_mcv_iconText);
+            _iconTextColor = ta.GetColor(Resource.Styleable.Chip_mcv_iconTextColor, ContextCompat.GetColor(Context, Resource.Color.colorChipBackgroundClicked));
+            _iconTextBackgroundColor = ta.GetColor(Resource.Styleable.Chip_mcv_iconTextColor, ContextCompat.GetColor(Context, Resource.Color.colorChipCloseClicked));
 
             ta.Recycle();
         }

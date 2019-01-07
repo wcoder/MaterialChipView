@@ -1,4 +1,7 @@
-# Material Chip View ![version](http://img.shields.io/badge/original-v1.0.1-brightgreen.svg?style=flat) [![NuGet Badge](https://buildstats.info/nuget/MaterialChipView)](https://www.nuget.org/packages/MaterialChipView/)
+# Material Chip View
+![version](http://img.shields.io/badge/original-v1.0.1-brightgreen.svg?style=flat)
+[![NuGet Badge](https://buildstats.info/nuget/MaterialChipView)](https://www.nuget.org/packages/MaterialChipView/)
+[![Build status](https://yauhenipakala.visualstudio.com/My%20OS%20projects/_apis/build/status/MaterialChipView%20-%20Build%20master)](https://yauhenipakala.visualstudio.com/My%20OS%20projects/_build/latest?definitionId=3)
 
 Port of [MaterialChipView](https://github.com/robertlevonyan/materialChipView) for Xamarin.Android
 
@@ -53,8 +56,8 @@ app:mcv_textColor="@color/customTitleColor"
 
 ### Attributes
 
-|Custom Atributes             |Description                                 |
-|-----------------------------|--------------------------------------------|
+|Custom Atributes                 |Description                                 |
+|---------------------------------|--------------------------------------------|
 |`app:mcv_chipText`               |Text label of Chip                          |
 |`app:mcv_textColor`              |Custom color for text label                 |
 |`app:mcv_backgroundColor`        |Custom background color                     |
@@ -65,7 +68,12 @@ app:mcv_textColor="@color/customTitleColor"
 |`app:mcv_closeColor`             |Custom color for close button               |
 |`app:mcv_selectable`             |Chip with selection button                  |
 |`app:mcv_selectedTextColor`      |Custom color for label when selected        |
-|`app:mcv_selectedCloseColor`     |Custom color for close button when selected |
+|`app:mcv_cornerRadius`           |Change the corner radius of your Chip       |
+|`app:mcv_strokeSize`             |Add stroke to your Chip                     |
+|`app:mcv_strokeColor`            |Choose a custom stroke color for your Chip  |
+|`app:mcv_iconText`               |Instead of an image create icon from String |
+|`app:mcv_iconTextColor`          |Select a color for your String icon         |
+|`app:mcv_iconTextBackgroundColor`|Select a background color for String icon   |
 
 ### Setting Handlers
 
@@ -115,9 +123,36 @@ chip.Selectable //Chip has selection button
 chip.Clicked // Chip as clicked
 chip.SelectedTextColor // Custom color for label when selected
 chip.SelectedCloseColor // Custom color for close button when selected
+chip.CornerRadius // Set corner radius of your Chip
+chip.StrokeSize // Set width of stroke
+chip.StrokeColor // Set stroke color for your Chip
+chip.IconText // Set Chip icon text, text color and background color
 ```
 
 ## Versions
+
+### 1.2.5
+
+Sync with latest original library v1.2.5.
+
+### 1.2.1, 1.2.2
+
+General bug fixed
+
+#### 1.1.3
+
+Selection option added
+
+#### 1.1.2
+
+Icon text issue fixed
+
+#### 1.1.1
+
+Updated version of Material Chip View:
+    - the attribute names are changed to escape conflicts with other libs
+    - added new features like customizable corner radius and stroke
+    - recreation issue fixed for post Lollipop versions
 
 #### 1.0.1
 

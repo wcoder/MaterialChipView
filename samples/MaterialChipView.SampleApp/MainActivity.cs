@@ -16,8 +16,6 @@ namespace MaterialChipView.SampleApp
 
             SetContentView (Resource.Layout.Main);
 
-
-
             var footballChip = FindViewById<Chip>(Resource.Id.football_chip);
             footballChip.Click += FootballChipOnClick;
             footballChip.IconClick += FootballChipOnIconClick;
