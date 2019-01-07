@@ -118,7 +118,7 @@ namespace MaterialChipView
                 return iconText;
             }
 
-            var parts = iconText.Split(" ");
+            var parts = iconText.Split(' ');
             if (parts.Length == 1)
             {
                 var text = parts[0];
