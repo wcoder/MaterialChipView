@@ -1,5 +1,5 @@
 # Material Chip View
-![version](http://img.shields.io/badge/original-v1.0.1-brightgreen.svg?style=flat)
+![version](http://img.shields.io/badge/original-v1.2.5-brightgreen.svg?style=flat)
 [![NuGet Badge](https://buildstats.info/nuget/MaterialChipView)](https://www.nuget.org/packages/MaterialChipView/)
 [![Build status](https://yauhenipakala.visualstudio.com/My%20OS%20projects/_apis/build/status/MaterialChipView%20-%20Build%20master)](https://yauhenipakala.visualstudio.com/My%20OS%20projects/_build/latest?definitionId=3)
 
@@ -130,6 +130,13 @@ chip.IconText // Set Chip icon text, text color and background color
 ```
 
 ## Versions
+
+### 1.2.5.1
+
+Only ported-side changes:
+- Add `ChipSpanText` property for set `SpannableString` value;
+- Move to C#;
+- Add disposing canvas for `ChipUtils`.
 
 ### 1.2.5
 
