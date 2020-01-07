@@ -9,6 +9,7 @@ using Android.Widget;
 using Android.Support.V4.Content;
 using Android.Support.V4.View;
 using static MaterialChipView.ChipUtils;
+using Android.Text;
 
 namespace MaterialChipView
 {
@@ -17,6 +18,7 @@ namespace MaterialChipView
         #region fields
 
         private string _chipText;
+        private SpannableString _chipSpanText;
         private bool _hasIcon;
         private Drawable _chipIcon;
         private Bitmap _chipIconBitmap;
@@ -61,6 +63,12 @@ namespace MaterialChipView
 	        get => _chipText;
             set { _chipText = value; RequestLayout(); }
 	    }
+
+        public SpannableString ChipSpanText
+        {
+            get => _chipSpanText;
+            set { _chipSpanText = value; RequestLayout(); }
+        }
 
         /// <summary>
         /// Chip label color
@@ -452,7 +460,15 @@ namespace MaterialChipView
 
             _chipTextView.LayoutParameters = chipTextParams;
             _chipTextView.SetTextColor(new Color(_selected ? _selectedTextColor : _textColor));
-            _chipTextView.Text = _chipText;
+
+            if (ChipSpanText == null)
+            {
+                _chipTextView.Text = _chipText;
+            }
+            else
+            {
+                _chipTextView.SetText(_chipSpanText, TextView.BufferType.Spannable);
+            }
             _chipTextView.Id = TextId;
 
             RemoveView(_chipTextView);
