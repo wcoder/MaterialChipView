@@ -13,8 +13,8 @@ using Android.Text;
 
 namespace MaterialChipView
 {
-	public class Chip : RelativeLayout
-	{
+    public class Chip : RelativeLayout
+    {
         #region fields
 
         private string _chipText;
@@ -49,7 +49,7 @@ namespace MaterialChipView
 
         public event EventHandler Close;
         public event EventHandler IconClick;
-	    public event EventHandler Select;
+        public event EventHandler Select;
 
         #endregion
 
@@ -59,10 +59,10 @@ namespace MaterialChipView
         /// Chip label text
         /// </summary>
         public string ChipText
-	    {
-	        get => _chipText;
+        {
+            get => _chipText;
             set { _chipText = value; RequestLayout(); }
-	    }
+        }
 
         public SpannableString ChipSpanText
         {
@@ -74,26 +74,26 @@ namespace MaterialChipView
         /// Chip label color
         /// </summary>
 	    public int TextColor
-	    {
-	        get => _textColor;
+        {
+            get => _textColor;
             set { _textColor = value; RequestLayout(); }
-	    }
+        }
 
         /// <summary>
         /// Custom background color
         /// </summary>
 	    public int BackgroundColor
-	    {
-	        get => _backgroundColor;
+        {
+            get => _backgroundColor;
             set { _backgroundColor = value; RequestLayout(); }
-	    }
+        }
 
         /// <summary>
         /// Custom background color when selected
         /// </summary>
 	    public int SelectedBackgroundColor
-	    {
-	        get => _selectedBackgroundColor;
+        {
+            get => _selectedBackgroundColor;
             set { _selectedBackgroundColor = value; RequestLayout(); }
         }
 
@@ -110,8 +110,8 @@ namespace MaterialChipView
         /// Icon Drawable for Chip
         /// </summary>
         public Drawable ChipIcon
-	    {
-	        get => _chipIcon;
+        {
+            get => _chipIcon;
             set { _chipIcon = value; RequestLayout(); }
         }
 
@@ -119,27 +119,27 @@ namespace MaterialChipView
         /// Chip has close button
         /// </summary>
 	    public bool Closable
-	    {
-	        get => _closable;
+        {
+            get => _closable;
             set
             {
-	            _closable = value;
-	            _selectable = false;
+                _closable = value;
+                _selectable = false;
                 _selected = false;
                 RequestLayout();
             }
-	    }
+        }
 
         /// <summary>
         /// Custom color for close button
         /// </summary>
         public int CloseColor
-	    {
-	        get => _closeColor;
+        {
+            get => _closeColor;
             set { _closeColor = value; RequestLayout(); }
-	    }
+        }
 
-	    /// <summary>
+        /// <summary>
         /// Chip has selection button
         /// </summary>
         public bool Selectable
@@ -154,12 +154,12 @@ namespace MaterialChipView
             }
         }
 
-	    /// <summary>
-	    /// Custom color for label when selected
-	    /// </summary>
-	    public int SelectedTextColor
-	    {
-	        get => _selectedTextColor;
+        /// <summary>
+        /// Custom color for label when selected
+        /// </summary>
+        public int SelectedTextColor
+        {
+            get => _selectedTextColor;
             set { _selectedTextColor = value; RequestLayout(); }
         }
 
@@ -167,10 +167,10 @@ namespace MaterialChipView
         /// Custom color for close button when selected
         /// </summary>
 	    public int SelectedCloseColor
-	    {
-	        get => _selectedCloseColor;
+        {
+            get => _selectedCloseColor;
             set { _selectedCloseColor = value; RequestLayout(); }
-	    }
+        }
 
         public int CornerRadius
         {
@@ -250,7 +250,7 @@ namespace MaterialChipView
             var thisParams = LayoutParameters;
 
             thisParams.Width = ViewGroup.LayoutParams.WrapContent;
-            thisParams.Height = (int) Resources.GetDimension(Resource.Dimension.chip_height);
+            thisParams.Height = (int)Resources.GetDimension(Resource.Dimension.chip_height);
 
             LayoutParameters = thisParams;
         }
@@ -262,8 +262,15 @@ namespace MaterialChipView
         public void SetIconText(string iconText, int iconTextColor, int iconTextBackgroundColor)
         {
             _iconText = GenerateText(iconText);
-            _iconTextColor = iconTextColor == 0 ? ContextCompat.GetColor(Context, Resource.Color.colorChipBackgroundClicked) : iconTextColor;
-            _iconTextBackgroundColor = iconTextBackgroundColor == 0 ? ContextCompat.GetColor(Context, Resource.Color.colorChipCloseClicked) : iconTextBackgroundColor;
+
+            _iconTextColor = iconTextColor == 0
+                ? ContextCompat.GetColor(Context, Resource.Color.colorChipBackgroundClicked)
+                : iconTextColor;
+
+            _iconTextBackgroundColor = iconTextBackgroundColor == 0
+                ? ContextCompat.GetColor(Context, Resource.Color.colorChipCloseClicked)
+                : iconTextBackgroundColor;
+
             RequestLayout();
         }
 
@@ -308,7 +315,8 @@ namespace MaterialChipView
         {
             _closeIcon.Touch += (sender, args) =>
             {
-                switch (args.Event.Action) {
+                switch (args.Event.Action)
+                {
                     case MotionEventActions.Down:
                     case MotionEventActions.Pointer1Down:
                         CloseChip((View)sender, true);
@@ -404,7 +412,7 @@ namespace MaterialChipView
             icon.SetScaleType(ImageView.ScaleType.FitCenter);
             icon.Id = ImageId;
 
-            var bitmap = ((BitmapDrawable) _chipIcon).Bitmap;
+            var bitmap = ((BitmapDrawable)_chipIcon).Bitmap;
             if (_chipIcon != null && bitmap != null)
             {
                 bitmap = GetSquareBitmap(bitmap);

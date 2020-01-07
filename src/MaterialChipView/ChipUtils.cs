@@ -10,9 +10,6 @@ namespace MaterialChipView
         public static readonly int ImageId = Resource.Id.chip_image;
         public static readonly int TextId = Resource.Id.chip_text;
 
-        private static int[] Colors = {0xd32f2f, 0xC2185B, 0x7B1FA2, 0x512DA8, 0x303F9F, 0x1976D2, 0x0288D1, 0x0097A7, 0x00796B, 0x388E3C, 0x689F38,
-            0xAFB42B, 0xFBC02D, 0xFFA000, 0xF57C00, 0xE64A19, 0x5D4037, 0x616161, 0x455A64};
-
         public static Bitmap GetScaledBitmap(Context context, Bitmap bitmap)
         {
             int width = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
@@ -27,7 +24,7 @@ namespace MaterialChipView
             {
                 output = Bitmap.CreateBitmap(
                     bitmap,
-                    bitmap.Width/ 2 - bitmap.Height / 2,
+                    bitmap.Width / 2 - bitmap.Height / 2,
                     0,
                     bitmap.Height,
                     bitmap.Height
@@ -111,7 +108,7 @@ namespace MaterialChipView
         {
             if (string.IsNullOrEmpty(iconText))
             {
-                throw new ArgumentNullException("Icon text must have at least one symbol");
+                throw new ArgumentNullException(nameof(iconText), "Icon text must have at least one symbol");
             }
             if (iconText.Length == 1 || iconText.Length == 2)
             {
