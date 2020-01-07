@@ -47,7 +47,7 @@ namespace MaterialChipView
         {
             int width = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
             Bitmap output = Bitmap.CreateBitmap(width, width, Bitmap.Config.Argb8888);
-            Canvas canvas = new Canvas(output);
+            using Canvas canvas = new Canvas(output);
 
             Paint paint = new Paint();
             Rect rect = new Rect(0, 0, width, width);
@@ -68,7 +68,7 @@ namespace MaterialChipView
         {
             int width = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
             var output = Bitmap.CreateBitmap(width, width, Bitmap.Config.Argb8888);
-            var canvas = new Canvas(output);
+            using var canvas = new Canvas(output);
 
             var paint = new Paint();
             var textPaint = new Paint();
