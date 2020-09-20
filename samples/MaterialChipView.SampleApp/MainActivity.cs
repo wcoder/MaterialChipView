@@ -4,7 +4,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Text;
 using Android.Text.Style;
-using Com.Google.Android.Flexbox;
+using Android.Flexbox;
 
 namespace MaterialChipView.SampleApp
 {

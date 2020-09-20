@@ -6,10 +6,10 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.Content;
-using Android.Support.V4.View;
 using static MaterialChipView.ChipUtils;
 using Android.Text;
+using AndroidX.Core.Content;
+using AndroidX.Core.View;
 
 namespace MaterialChipView
 {
