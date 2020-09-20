@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
   <com.google.android.flexbox.FlexboxLayout
@@ -15,31 +16,31 @@
     app:showDivider="middle">
 
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:mcv_chipText="Chip Sample" />
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:mcv_chipText="Chip Sample"
       app:mcv_closable="true" />
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:mcv_chipText="Chip Sample"
       app:mcv_selectable="true" />
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:mcv_chipText="Chip Sample"
       app:mcv_hasIcon="true"
       app:mcv_chipIcon="@drawable/icon"/>
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:mcv_chipText="Chip Sample"
@@ -47,7 +48,7 @@
       app:mcv_chipIcon="@drawable/icon"
       app:mcv_closable="true"/>
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:id="@+id/football_chip"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -62,7 +63,7 @@
       app:mcv_selectedBackgroundColor="@color/colorFootballSelected"
       app:mcv_textColor="@color/colorFootballSelected" />
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:id="@+id/basketball_chip"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -76,7 +77,7 @@
       app:mcv_selectedBackgroundColor="@color/colorBasketballSelected"
       app:mcv_textColor="@color/colorBasketballSelected" />
 
-    <MaterialChipView.Chip
+    <com.robertlevonyan.views.chip.Chip
       android:id="@+id/tennis_chip"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -90,9 +91,7 @@
       app:mcv_textColor="@color/colorTennisSelected" />
 
 
-
   </com.google.android.flexbox.FlexboxLayout>
-
 
 
   

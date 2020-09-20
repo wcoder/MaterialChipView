@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Text;
 using Android.Text.Style;
 using Com.Google.Android.Flexbox;
+using Com.Robertlevonyan.Views.Chip;
 
 namespace MaterialChipView.SampleApp
 {
@@ -22,17 +23,17 @@ namespace MaterialChipView.SampleApp
             var footballChip = FindViewById<Chip>(Resource.Id.football_chip);
             footballChip.Click += FootballChipOnClick;
             footballChip.IconClick += FootballChipOnIconClick;
-            footballChip.Select += FootballChipOnSelect;
+            footballChip.SelectClick += FootballChipOnSelect;
 
 
             var span = new SpannableString("My Football");
             span.SetSpan(new ForegroundColorSpan(Color.Red), 0, 2, 0);  // "My" is red
             span.SetSpan(new ForegroundColorSpan(Color.Blue), 3, 11, 0); // "Football" is blue
-            footballChip.ChipSpanText = span;
+            //footballChip.ChipSpanText = span;
 
 
             _tenisChip = FindViewById<Chip>(Resource.Id.tennis_chip);
-            _tenisChip.Close += TenisChipOnClose;
+            _tenisChip.CloseClick += TenisChipOnClose;
         }
 
         private void TenisChipOnClose(object sender, EventArgs e)

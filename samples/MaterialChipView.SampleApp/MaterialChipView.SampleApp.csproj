@@ -48,14 +48,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FlexboxLayoutXamarinBindingAndroid" Version="1.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\MaterialChipView\MaterialChipView.csproj">
-      <Project>{20CD7BF0-3EC0-4BA5-9DF4-67C68E3C193A}</Project>
-      <Name>MaterialChipView</Name>
-    </ProjectReference>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Kotlin.StdLib">
+      <Version>1.3.41</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -90,6 +88,16 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MaterialChipView\MaterialChipView.csproj">
+      <Project>{20CD7BF0-3EC0-4BA5-9DF4-67C68E3C193A}</Project>
+      <Name>MaterialChipView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\MaterialChipViewBinding\MaterialChipViewBinding.csproj">
+      <Project>{338F7EB9-DB26-494F-905B-089C15A6C110}</Project>
+      <Name>MaterialChipViewBinding</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
