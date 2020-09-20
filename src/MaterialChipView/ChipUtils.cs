@@ -10,10 +10,12 @@ namespace MaterialChipView
         public static readonly int ImageId = Resource.Id.chip_image;
         public static readonly int TextId = Resource.Id.chip_text;
 
+        // private static int[] colors
+
         public static Bitmap GetScaledBitmap(Context context, Bitmap bitmap)
         {
-            int width = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
-            return Bitmap.CreateScaledBitmap(bitmap, width, width, false);
+            int size = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
+            return Bitmap.CreateScaledBitmap(bitmap, size, size, false);
         }
 
         public static Bitmap GetSquareBitmap(Bitmap bitmap)
@@ -45,18 +47,19 @@ namespace MaterialChipView
 
         public static Bitmap GetCircleBitmap(Context context, Bitmap bitmap)
         {
-            int width = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
-            Bitmap output = Bitmap.CreateBitmap(width, width, Bitmap.Config.Argb8888);
+            int size = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
+            Bitmap output = Bitmap.CreateBitmap(size, size, Bitmap.Config.Argb8888);
             using Canvas canvas = new Canvas(output);
 
+            int color = Color.Red;
             Paint paint = new Paint();
-            Rect rect = new Rect(0, 0, width, width);
+            Rect rect = new Rect(0, 0, size, size);
             RectF rectF = new RectF(rect);
 
             paint.AntiAlias = true;
             canvas.DrawARGB(0, 0, 0, 0);
-            paint.Color = Color.Red;
-            canvas.DrawOval(rectF, paint);
+            paint.Color = color;
+            canvas.DrawRoundRect(rectF, rect, rect, paint);
 
             paint.SetXfermode(new PorterDuffXfermode(PorterDuff.Mode.SrcIn));
             canvas.DrawBitmap(bitmap, rect, rect, paint);
@@ -64,24 +67,24 @@ namespace MaterialChipView
             return output;
         }
 
-        public static Bitmap getCircleBitmapWithText(Context context, string text, int bgColor, int textColor)
+        public static Bitmap getCircleBitmapWithText(Context context, string text, int bgColor, int textColor, float radius)
         {
-            int width = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
-            var output = Bitmap.CreateBitmap(width, width, Bitmap.Config.Argb8888);
+            int size = (int)context.Resources.GetDimension(Resource.Dimension.chip_height);
+            var output = Bitmap.CreateBitmap(size, size, Bitmap.Config.Argb8888);
             using var canvas = new Canvas(output);
 
             var paint = new Paint();
             var textPaint = new Paint();
-            var rect = new Rect(0, 0, width, width);
+            var rect = new Rect(0, 0, size, size);
             var rectF = new RectF(rect);
 
             paint.AntiAlias = true;
             canvas.DrawARGB(0, 0, 0, 0);
             paint.Color = new Color(bgColor);
-            canvas.DrawOval(rectF, paint);
+            canvas.DrawRoundRect(rectF, radius, radius, paint);
             textPaint.Color = new Color(textColor);
             textPaint.StrokeWidth = 30;
-            textPaint.TextSize = 50;
+            textPaint.TextSize = 45;
             paint.SetXfermode(new PorterDuffXfermode(PorterDuff.Mode.SrcOver));
             textPaint.SetXfermode(new PorterDuffXfermode(PorterDuff.Mode.SrcAtop));
 
@@ -89,12 +92,12 @@ namespace MaterialChipView
             int yPos;
             if (text.Length == 1)
             {
-                xPos = (int)((canvas.Width / 1.9f) + ((textPaint.Descent() + textPaint.Ascent()) / 2f));
+                xPos = (int)((canvas.Width / 2f) + ((textPaint.Descent() + textPaint.Ascent()) / 2f));
                 yPos = (int)((canvas.Height / 2f) - ((textPaint.Descent() + textPaint.Ascent()) / 2f));
             }
             else
             {
-                xPos = (int)((canvas.Width / 2.7f) + ((textPaint.Descent() + textPaint.Ascent()) / 2f));
+                xPos = (int)((canvas.Width / 3f) + ((textPaint.Descent() + textPaint.Ascent()) / 2f));
                 yPos = (int)((canvas.Height / 2f) - ((textPaint.Descent() + textPaint.Ascent()) / 2f));
             }
 
