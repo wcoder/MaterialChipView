@@ -131,6 +131,11 @@ chip.IconText // Set Chip icon text, text color and background color
 
 ## Versions
 
+### 1.2.5.2
+
+Only ported-side changes:
+- Replace Android.Support to AndroidX libraries
+
 ### 1.2.5.1
 
 Only ported-side changes:
